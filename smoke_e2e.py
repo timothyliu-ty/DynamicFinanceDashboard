@@ -10,12 +10,19 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = 8899
 BASE = "http://127.0.0.1:%d" % PORT
 results = []
+skipped = []
 
 
 def check(name, cond, detail=""):
     results.append((bool(cond), name, detail))
     print("  [%s] %-46s %s" % ("PASS" if cond else "FAIL", name, detail[:96]))
     return bool(cond)
+
+
+def skip(name, reason):
+    """记一次跳过：条件是已知且已被处理的状态（例如第三方额度耗尽），不是本次回归。"""
+    skipped.append((name, reason))
+    print("  [SKIP] %-46s %s" % (name, reason[:96]))
 
 
 def http_get(path, timeout=30):
@@ -192,11 +199,18 @@ def main():
               b"I18N" in body and b"mt-badge" in body)
         check("client translates lazily via /api/translate", b"/api/translate" in body)
 
-        # 用真实新闻标题做端到端翻译（消耗真实额度，只取 3 条）
+        # 用真实新闻标题做端到端翻译（消耗真实额度，只取 3 条）。
+        # 匿名额度是硬上限：额度不足时这是「已知且已被处理」的状态，不是回归，因此记 SKIP。
+        # 额度耗尽时界面该有的行为由 smoke_client.js 单独覆盖。
         real = [i["title"] for i in (classes.get("NEWS", {}).get("items") or [])[:3]
                 if i.get("title")]
         check("have real headlines to translate", len(real) == 3, "n=%d" % len(real))
-        if real:
+        need = sum(len(x) for x in real)
+        if real and bud.get("remaining", 0) < need:
+            skip("real translation end-to-end",
+                 "daily quota spent: remaining=%s < %s chars needed"
+                 % (bud.get("remaining"), need))
+        elif real:
             code, raw = http_post("/api/translate", {"to": "zh", "texts": real})
             check("POST /api/translate -> 200", code == 200, "status=%s" % code)
             d = json.loads(raw) if code == 200 else {}
@@ -244,10 +258,13 @@ def main():
 
     passed = sum(1 for ok, _, _ in results if ok)
     print("\n" + "=" * 78)
-    print("E2E: %d/%d passed" % (passed, len(results)))
+    print("E2E: %d/%d passed%s" % (passed, len(results),
+                                   ", %d skipped" % len(skipped) if skipped else ""))
     for ok, name, detail in results:
         if not ok:
             print("  FAILED: %s  %s" % (name, detail))
+    for name, reason in skipped:
+        print("  SKIPPED: %s  %s" % (name, reason))
     return 0 if passed == len(results) else 1
 
 

@@ -162,9 +162,15 @@ Translations are a **reading aid only**, never a trading input, and are always l
 ```bash
 python3 -m pytest         # 55 offline unit tests — no network
 python3 smoke_e2e.py      # 44 end-to-end: real server, real HTTP, real SSE, 3 real translations
+                          # (37 run always; 7 need unspent translation quota — see below)
 node smoke_client.js      # 40 client tests in a real DOM (needs jsdom; see below)
 python3 -m qsdash check   # full-stack health check
 ```
+
+Seven of the end-to-end checks translate three live headlines and therefore consume real quota.
+When the daily quota is spent they are reported as `SKIPPED` with the remaining-chars figure rather
+than as failures, and the run still exits 0 — a spent quota is a known, handled state, not a
+regression. Everything else always runs.
 
 The offline tests replace `net.fetch` with fixtures captured from the **real** endpoints, which
 lets the assertions pin **exact field indices**. That is the main regression guard here — the thing

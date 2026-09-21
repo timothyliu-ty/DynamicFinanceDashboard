@@ -162,7 +162,7 @@ Translations are a **reading aid only**, never a trading input, and are always l
 ```bash
 python3 -m pytest         # 55 offline unit tests — no network
 python3 smoke_e2e.py      # 44 end-to-end: real server, real HTTP, real SSE, 3 real translations
-node smoke_client.js      # 40 client tests: jsdom actually executes terminal.js
+node smoke_client.js      # 40 client tests in a real DOM (needs jsdom; see below)
 python3 -m qsdash check   # full-stack health check
 ```
 
@@ -170,10 +170,20 @@ The offline tests replace `net.fetch` with fixtures captured from the **real** e
 lets the assertions pin **exact field indices**. That is the main regression guard here — the thing
 most likely to be broken by an innocent-looking edit.
 
-`smoke_client.js` runs the real `terminal.js` in a real DOM (jsdom, taken from an existing local
-checkout — not a project dependency) and deliberately exercises the failure path: when the
-translation quota is exhausted, the interface must still switch language, every headline must keep
-its original text, and no headline may render empty.
+`smoke_client.js` runs the real `terminal.js` in a real DOM and deliberately exercises the
+failure path: when the translation quota is exhausted, the interface must still switch language,
+every headline must keep its original text, and no headline may render empty.
+
+jsdom is **not** a dependency of this project — only this harness needs it. It is resolved from
+`JSDOM_PATH`, then a global install, then a local `node_modules`. When it is absent the harness
+prints `SKIPPED` and exits 0 instead of failing; the unit tests and `smoke_e2e.py` cover
+everything else.
+
+```bash
+npm install -g jsdom
+# or
+JSDOM_PATH=/path/to/jsdom node smoke_client.js
+```
 
 ---
 

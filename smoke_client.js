@@ -15,7 +15,35 @@ const path = require('path');
 const fs = require('fs');
 
 const HERE = __dirname;
-const { JSDOM } = require('/Users/tianliu/tim_ai_tools/deepseek-harness/node_modules/jsdom');
+
+/* jsdom is NOT a dependency of this project — it is only needed to run this harness.
+ * Look for it in the usual places so a fresh clone works for anyone who has it,
+ * and degrade with a clear message (instead of a stack trace) when it is absent. */
+function loadJsdom() {
+  const candidates = [
+    process.env.JSDOM_PATH,
+    'jsdom',
+    '/opt/homebrew/lib/node_modules/jsdom',
+    '/usr/local/lib/node_modules/jsdom',
+    path.join(process.env.HOME || '', 'node_modules', 'jsdom')
+  ].filter(Boolean);
+  for (const c of candidates) {
+    try { return require(c); } catch (e) { /* try the next one */ }
+  }
+  return null;
+}
+
+const jsdom = loadJsdom();
+if (!jsdom) {
+  console.log('SKIPPED: jsdom not found.');
+  console.log('  This harness executes qsdash/static/terminal.js in a real DOM; jsdom is not a');
+  console.log('  dependency of the project, so it must be available separately. Either:');
+  console.log('    npm install -g jsdom        # or: npm install jsdom');
+  console.log('    JSDOM_PATH=/path/to/jsdom node smoke_client.js');
+  console.log('  Everything else is verified by the offline unit tests and smoke_e2e.py.');
+  process.exit(0);
+}
+const { JSDOM } = jsdom;
 
 const SNAP = JSON.parse(fs.readFileSync(path.join(HERE, 'tests/fixtures/snapshot_live.json'), 'utf8'));
 const HTML = fs.readFileSync(path.join(HERE, 'qsdash/static/index.html'), 'utf8');

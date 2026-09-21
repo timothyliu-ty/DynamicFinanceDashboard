@@ -154,16 +154,25 @@ MyMemory 是**翻译记忆库**，不是专门的机器翻译引擎。以下是�
 ```bash
 python3 -m pytest         # 55 项离线单测——不打网络
 python3 smoke_e2e.py      # 44 项端到端：真起服务、真打 HTTP、真读 SSE、真实翻译 3 条
-node smoke_client.js      # 40 项客户端自测：用 jsdom 真正执行 terminal.js
+node smoke_client.js      # 40 项客户端自测：在真实 DOM 中执行（需 jsdom，见下）
 python3 -m qsdash check   # 全链路体检
 ```
 
 离线单测把 `net.fetch` 换成从**真实端点**抓回来的样本，因此断言可以**逐位锁定字段索引**。
 这是本项目最主要的回归护栏——也是「看着无害的一次改动」最容易改坏的地方。
 
-`smoke_client.js` 在真实 DOM 里运行真实的 `terminal.js`（jsdom 取自本机已有的 checkout，
-**不是**本项目的依赖），并且刻意覆盖失败路径：翻译额度用尽时，界面仍须能切换语言、
-每条标题必须保持原文、且不得有任何标题渲染为空。
+`smoke_client.js` 在真实 DOM 里运行真实的 `terminal.js`，并且刻意覆盖失败路径：
+翻译额度用尽时，界面仍须能切换语言、每条标题必须保持原文、且不得有任何标题渲染为空。
+
+jsdom **不是**本项目的依赖，只有这个 harness 需要它。查找顺序为 `JSDOM_PATH` → 全局安装 →
+本地 `node_modules`；找不到时打印 `SKIPPED` 并以退出码 0 结束，不判失败。
+其余部分由离线单测与 `smoke_e2e.py` 覆盖。
+
+```bash
+npm install -g jsdom
+# 或
+JSDOM_PATH=/path/to/jsdom node smoke_client.js
+```
 
 ---
 

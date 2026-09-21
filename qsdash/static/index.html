@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QS-DASH &middot; Global Multi-Asset Terminal</title>
+<link rel="stylesheet" href="/static/terminal.css">
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="logo">&#9632;</span>
+    <span class="bname">QS-DASH</span>
+    <span class="bsub" id="b-sub">GLOBAL MULTI-ASSET TERMINAL</span>
+  </div>
+  <div class="topmeta">
+    <span class="kv"><label id="l-session">SESSION</label><b id="m-session">&mdash;</b></span>
+    <span class="kv"><label id="l-uptime">UPTIME</label><b id="m-uptime">&mdash;</b></span>
+    <span class="kv"><label id="l-feeds">FEEDS</label><b id="m-feeds">&mdash;</b></span>
+    <span class="kv"><label id="l-upd">UPD</label><b id="m-upd">&mdash;</b></span>
+    <span class="kv"><label id="l-clock">CLOCK</label><b id="m-clock">&mdash;</b></span>
+    <span class="lang-tog" id="lang-tog"></span>
+    <span id="conn" class="conn conn-init">CONNECTING</span>
+  </div>
+</header>
+
+<nav id="fnbar"></nav>
+
+<div id="tape"><div id="tape-track" class="tape-track"></div></div>
+
+<div id="alert" class="alert hidden"></div>
+
+<main id="grid" class="grid"></main>
+
+<footer id="statusbar">
+  <span class="sb-item"><label id="l-src">SRC</label><span id="s-src">&mdash;</span></span>
+  <span class="sb-item"><label id="l-mode">MODE</label><span id="s-mode">POLL / SSE &middot; STANDARD LIBRARY ONLY</span></span>
+  <span class="sb-item sb-right" id="s-note">data is polled, not tick-level &mdash; see SPEC-DASH &sect;6</span>
+</footer>
+
+<script src="/static/terminal.js"></script>
+</body>
+</html>

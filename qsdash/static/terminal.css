@@ -1,0 +1,212 @@
+/* QS-DASH —— Bloomberg 终端语义：暗底 / 琥珀 / 等宽 / 高密度。
+   无任何外部字体或 CDN 请求（AC-D6.6）。 */
+
+:root {
+  --bg:        #04070a;
+  --bg-panel:  #080c11;
+  --bg-head:   #0d131b;
+  --bg-row:    #0a0f15;
+  --bg-row-alt:#0c1219;
+  --line:      #1a2531;
+  --line-soft: #131c26;
+  --amber:     #ffa028;
+  --amber-dim: #b8731d;
+  --text:      #c3cfdb;
+  --text-dim:  #5d6d7e;
+  --text-hi:   #ffffff;
+  --up:        #2ee08a;
+  --down:      #ff4d5e;
+  --neutral:   #7f8fa0;
+  --warn:      #ffcc33;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.35;
+  height: 100%;
+}
+
+body { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ------------------------------------------------------------- top bar */
+#topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(180deg, #0e1620 0%, #080d13 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 4px 10px;
+  flex: 0 0 auto;
+}
+.brand { display: flex; align-items: baseline; gap: 8px; }
+.logo { color: var(--amber); font-size: 14px; }
+.bname { color: var(--amber); font-weight: 700; letter-spacing: 1.6px; font-size: 14px; }
+.bsub { color: var(--text-dim); font-size: 10px; letter-spacing: 1.4px; }
+.topmeta { display: flex; align-items: center; gap: 14px; font-size: 11px; }
+.kv label { color: var(--text-dim); font-size: 9px; letter-spacing: 1px; margin-right: 4px; }
+.kv b { color: var(--text-hi); font-weight: 500; }
+
+.conn { padding: 1px 7px; border: 1px solid var(--line); font-size: 10px; letter-spacing: 1px; }
+.conn-init { color: var(--warn); border-color: #4a3c10; }
+.conn-live { color: var(--up); border-color: #16543a; background: #06150e; }
+.conn-down { color: var(--down); border-color: #5c1d24; background: #170609; }
+
+/* ---------------------------------------------------------- function bar */
+#fnbar {
+  display: flex; gap: 1px; background: var(--line-soft);
+  border-bottom: 1px solid var(--line); flex: 0 0 auto; overflow-x: auto;
+}
+.fn {
+  background: var(--bg-head); color: var(--text-dim);
+  border: none; border-right: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.8px;
+  padding: 5px 14px; cursor: pointer; white-space: nowrap;
+}
+.fn:hover { color: var(--text); background: #101822; }
+.fn.active { color: #1a1004; background: var(--amber); font-weight: 700; }
+.fn .fkey { color: var(--amber-dim); margin-right: 5px; font-weight: 700; }
+.fn.active .fkey { color: #5a3506; }
+
+/* ------------------------------------------------------------- ticker tape */
+#tape {
+  flex: 0 0 auto; overflow: hidden; white-space: nowrap;
+  background: #060a0e; border-bottom: 1px solid var(--line);
+  height: 22px; position: relative;
+}
+.tape-track {
+  display: inline-block; white-space: nowrap;
+  animation: tape-scroll 90s linear infinite;
+  will-change: transform;
+}
+#tape:hover .tape-track { animation-play-state: paused; }
+@keyframes tape-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tape-item { display: inline-block; padding: 3px 12px; font-size: 11px; border-right: 1px solid var(--line-soft); }
+.tape-item .t-sym { color: var(--text-dim); margin-right: 6px; }
+.tape-item .t-px { color: var(--text-hi); margin-right: 6px; }
+.tape-empty { color: var(--text-dim); padding: 3px 12px; font-size: 11px; }
+
+/* ------------------------------------------------------------------ alert */
+.alert {
+  flex: 0 0 auto; background: #1c0a0d; color: var(--down);
+  border-bottom: 1px solid #5c1d24; padding: 3px 10px; font-size: 11px;
+  letter-spacing: 0.4px;
+}
+.hidden { display: none !important; }
+
+/* ------------------------------------------------------------------- grid */
+.grid {
+  flex: 1 1 auto; display: grid; gap: 6px; padding: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+  align-content: start; overflow-y: auto;
+}
+.panel {
+  background: var(--bg-panel); border: 1px solid var(--line);
+  display: flex; flex-direction: column; min-width: 0;
+}
+.panel.wide { grid-column: 1 / -1; }
+.panel.dead { opacity: 0.55; border-color: #4a1a20; }
+
+.phead {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-head); border-bottom: 1px solid var(--line);
+  padding: 3px 8px;
+}
+.ptitle { color: var(--amber); font-size: 11px; letter-spacing: 1.1px; font-weight: 700; }
+.ptitle .pzh { color: var(--text-dim); font-weight: 400; margin-left: 6px; letter-spacing: 0; }
+.pmeta { color: var(--text-dim); font-size: 10px; }
+.pmeta .bad { color: var(--down); }
+.pmeta .stale { color: var(--warn); }
+
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  color: var(--text-dim); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.7px; text-align: right; padding: 2px 7px;
+  border-bottom: 1px solid var(--line); background: #0a1017;
+  position: sticky; top: 0;
+}
+thead th.l { text-align: left; }
+tbody td {
+  padding: 1px 7px; text-align: right; font-size: 11.5px;
+  border-bottom: 1px solid var(--line-soft); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+tbody td.l { text-align: left; }
+tbody tr:nth-child(even) { background: var(--bg-row-alt); }
+tbody tr:hover { background: #131c26; }
+.sym { color: var(--amber); font-weight: 700; }
+.nm { color: var(--text-dim); max-width: 190px; display: inline-block;
+      overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+.px { color: var(--text-hi); }
+.up { color: var(--up); }
+.down { color: var(--down); }
+.flat { color: var(--neutral); }
+.dim { color: var(--text-dim); }
+
+/* 仅在值实际变化时闪烁（AC-D6.3） */
+@keyframes flash-up { 0% { background: rgba(46,224,138,0.42); } 100% { background: transparent; } }
+@keyframes flash-down { 0% { background: rgba(255,77,94,0.42); } 100% { background: transparent; } }
+tbody td.fu { animation: flash-up 0.75s ease-out; }
+tbody td.fd { animation: flash-down 0.75s ease-out; }
+
+.pfoot {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  border-top: 1px solid var(--line); background: #070b10;
+  padding: 2px 8px; color: var(--text-dim); font-size: 10px;
+}
+.pfoot b { color: var(--text); font-weight: 400; }
+.pfoot .err { color: var(--down); }
+
+/* ------------------------------------------------------------------ news */
+.news-list { list-style: none; margin: 0; padding: 0; max-height: 46vh; overflow-y: auto; }
+.news-list li { padding: 3px 8px; border-bottom: 1px solid var(--line-soft); }
+.news-list li:hover { background: #131c26; }
+.news-time { color: var(--text-dim); font-size: 10px; margin-right: 7px; }
+.news-src { color: var(--amber-dim); font-size: 10px; margin-right: 7px; }
+.news-title a { color: var(--text); text-decoration: none; }
+.news-title a:hover { color: var(--amber); text-decoration: underline; }
+.news-cat { font-size: 9px; padding: 0 4px; border: 1px solid var(--line); margin-left: 6px; color: var(--text-dim); }
+.news-cat.CRYPTO { color: #d9a3ff; border-color: #3a2352; }
+.news-cat.MACRO { color: #7fd3ff; border-color: #1d3c50; }
+.news-sum { color: var(--text-dim); font-size: 10.5px; margin-top: 1px; }
+
+/* 语言切换（AC-D8.1） */
+.lang-tog { display: inline-flex; border: 1px solid var(--line); }
+.lang-tog button {
+  background: var(--bg-head); color: var(--text-dim); border: none;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px;
+  padding: 1px 7px; cursor: pointer;
+}
+.lang-tog button + button { border-left: 1px solid var(--line); }
+.lang-tog button:hover { color: var(--text); }
+.lang-tog button.active { background: var(--amber); color: #1a1004; font-weight: 700; }
+
+/* 机翻标记（AC-D8.7）：译文永远带标，不与原文混淆 */
+.mt-badge {
+  font-size: 9px; padding: 0 4px; margin-left: 6px; cursor: pointer;
+  border: 1px solid #3a2352; color: #d9a3ff; vertical-align: middle;
+  user-select: none; white-space: nowrap;
+}
+.mt-badge:hover { background: #1d1229; }
+.mt-badge.hidden { display: none; }
+.news-title a.mt-shown { color: #d9a3ff; }
+.xl-budget { color: var(--text-dim); }
+
+/* -------------------------------------------------------------- statusbar */
+#statusbar {
+  flex: 0 0 auto; display: flex; gap: 18px; align-items: center;
+  background: #060a0e; border-top: 1px solid var(--line);
+  padding: 2px 10px; font-size: 10px; color: var(--text-dim);
+}
+.sb-item label { color: var(--line); margin-right: 5px; color: var(--text-dim); }
+.sb-item span { color: var(--text); }
+.sb-right { margin-left: auto; color: var(--text-dim) !important; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .bsub { display: none; }
+}

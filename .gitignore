@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data/*.log
+data/translation_cache.json
+reports/*.png

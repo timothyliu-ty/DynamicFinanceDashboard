@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:metadata="http://search.cnbc.com/rss/2.0/modules/siteContentMetadata" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <atom:link rel="self" type="application/rss+xml" href="https://www.cnbc.com/id/100003114/device/rss/rss.html"/>
+    <language>en-us</language>
+    <ttl>60</ttl>
+    <title>US Top News and Analysis</title>
+    <feed_asset>
+      <id>100003114</id>
+      <type>franchise</type>
+      <subtype>section</subtype>
+      <seo>https://www.cnbc.com/us-top-news-and-analysis/</seo>
+    </feed_asset>
+    <lastBuildDate>Mon, 21 Sep 2026 02:16 GMT</lastBuildDate>
+    <pubDate>Mon, 21 Sep 2026 02:16 GMT</pubDate>
+    <link>https://www.cnbc.com/us-top-news-and-analysis/</link>
+    <description><![CDATA[CNBC is the world leader in business news and real-time financial market coverage. Find fast, actionable information.]]></description>
+    <item>
+      <link>https://www.cnbc.com/2026/09/20/tariffs-fuel-prices-and-interest-rates-squeeze-us-companies.html</link>
+      <guid isPermaLink="false">108364690</guid>
+      <metadata:type>cnbcnewsstory</metadata:type>
+      <metadata:id>108364690</metadata:id>
+      <metadata:sponsored>false</metadata:sponsored>
+      <title>‘It&apos;s awful’: How tariffs, soaring fuel costs and higher interest rates are squeezing American companies</title>
+      <description><![CDATA[Tariffs, fuel prices and interest rates are squeezing American companies, particularly manufacturers, auto suppliers, retailers and transportation businesses.]]></description>
+      <pubDate>Sun, 20 Sep 2026 12:47:23 GMT</pubDate>
+    </item><item>
+      <link>https://www.cnbc.com/2026/09/20/bessent-he-lifeng-trump-xi-summit.html</link>
+      <guid isPermaLink="false">108365415</guid>
+      <metadata:type>cnbcnewsstory</metadata:type>
+      <metadata:id>108365415</metadata:id>
+      <metadata:sponsored>false</metadata:sponsored>
+      <title>Bessent calls meeting with China Vice Premier He Lifeng &apos;successful&apos; ahead of Trump-Xi summit</title>
+      <description><![CDATA[Treasury Secretary Scott Bessent said his meeting with Chinese Vice Premier He Lifeng was "successful" ahead of the Sept. 24 Trump-Xi summit.]]></description>
+      <pubDate>Mon, 21 Sep 2026 00:45:26 GMT</pubDate>
+    </item><item>
+      <link>https://www.cnbc.com/2026/09/21/iran-us-oil-prices-crude-saudi-arabia-.html</link>
+      <guid isPermaLink="false">108365441</guid>
+      <metadata:type>cnbcnewsstory</metadata:type>
+      <metadata:id>108365441</metadata:id>
+      <metadata:sponsored>false</metadata:sponsored>
+      <title>Oil falls as crude flows remain &apos;surprisingly strong&apos;</title>
+      <description><![CDATA[Oil fell Monday, as traders keep watch for a recovery in shipments from Saudi Arabia, even as Mideast tensions continue to escalate.]]></description>
+      <pubDate>Mon, 21 Sep 2026 02:14:21 GMT</pubDate>
+    </item><item>
+      <link>https://www.cnbc.com/2026/09/20/trump-mamdani-gracie-mansion-meeting.html</link>
+      <guid isPermaLink="false">108365422</guid>
+      <metadata:type>cnbcnewsstory</metadata:type>
+      <metadata:id>108365422</metadata:id>
+      <metadata:sponsored>false</metadata:sponsored>
+      <title>Trump to meet with NYC Mayor Zohran Mamdani on Monday ahead of UN General Assembly</title>
+      <description><![CDATA[The mayor's press office said the meeting will take place at Gracie Mansion and "will focus on issues affecting New York City and New Yorkers."]]></description>
+      <pubDate>Sun, 20 Sep 2026 19:06:16 GMT</pubDate>
+    </item><item>
+      <link>https://www.cnbc.com/2026/09/20/us-middle-east-travel-warning-iran-war-hormuz.html</link>
+      <guid isPermaLink="false">108365401</guid>
+      <metadata:type>cnbcnewsstory</metadata:type>
+      <metadata:id>108365401</metadata:id>
+      <metadata:sponsored>false</metadata:sponsored>
+      <title>U.S. urges Americans to reconsider Middle East travel as Iran tensions rise</title>
+      <description><![CDATA[The State Department urged Americans to reconsider Middle East travel as Houthi attacks intensify and Iran keeps the Strait of Hormuz closed.]]></description>
+      <pubDate>Sun, 20 Sep 2026 14:23:53 GMT</pubDate>
+    </item></channel></rss>

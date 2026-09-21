@@ -1,0 +1,248 @@
+{
+  "repos": [
+    {
+      "full_name": "ranaroussi/yfinance",
+      "stars": 25301,
+      "forks": 3422,
+      "lang": "Python",
+      "pushed": "2026-09-17",
+      "license": "Apache-2.0",
+      "desc": "Download market data from Yahoo! Finance's API"
+    },
+    {
+      "full_name": "ccxt/ccxt",
+      "stars": 44078,
+      "forks": 8848,
+      "lang": "Python",
+      "pushed": "2026-09-20",
+      "license": "MIT",
+      "desc": "A unified trading API with more than 100 crypto exchanges and prediction markets"
+    },
+    {
+      "full_name": "akfamily/akshare",
+      "stars": 22662,
+      "forks": 3515,
+      "lang": "Python",
+      "pushed": "2026-09-20",
+      "license": "MIT",
+      "desc": "AKShare is an elegant and simple financial data interface library for Python, bu"
+    },
+    {
+      "full_name": "OpenBB-finance/OpenBB",
+      "stars": 73312,
+      "forks": 7587,
+      "lang": "Python",
+      "pushed": "2026-09-19",
+      "license": "NOASSERTION",
+      "desc": "Open Data Platform for analysts, quants and AI agents."
+    },
+    {
+      "full_name": "kurtmckee/feedparser",
+      "stars": 2424,
+      "forks": 378,
+      "lang": "Python",
+      "pushed": "2026-09-07",
+      "license": "NOASSERTION",
+      "desc": "Parse feeds in Python"
+    },
+    {
+      "full_name": "codelucas/newspaper",
+      "stars": 15161,
+      "forks": 2116,
+      "lang": "Python",
+      "pushed": "2026-09-15",
+      "license": "MIT",
+      "desc": "newspaper3k is a news, full-text, and article metadata extraction in Python 3. A"
+    },
+    {
+      "full_name": "adbar/trafilatura",
+      "stars": 6843,
+      "forks": 431,
+      "lang": "Python",
+      "pushed": "2026-09-11",
+      "license": "Apache-2.0",
+      "desc": "Python & Command-line tool to gather text and metadata on the Web: Crawling, scr"
+    },
+    {
+      "full_name": "pydata/pandas-datareader",
+      "stars": 3269,
+      "forks": 693,
+      "lang": "Python",
+      "pushed": "2026-07-21",
+      "license": "NOASSERTION",
+      "desc": "Extract data from a wide range of Internet sources into a pandas DataFrame."
+    },
+    {
+      "full_name": "QuantConnect/Lean",
+      "stars": 21706,
+      "forks": 5253,
+      "lang": "C#",
+      "pushed": "2026-09-18",
+      "license": "Apache-2.0",
+      "desc": "Lean Algorithmic Trading Engine by QuantConnect (Python, C#)"
+    },
+    {
+      "full_name": "microsoft/qlib",
+      "stars": 48694,
+      "forks": 7709,
+      "lang": "Python",
+      "pushed": "2026-09-17",
+      "license": "MIT",
+      "desc": "Qlib is an AI-oriented Quant investment platform that aims to use AI tech to emp"
+    },
+    {
+      "full_name": "tradingview/lightweight-charts",
+      "stars": 17317,
+      "forks": 2605,
+      "lang": "TypeScript",
+      "pushed": "2026-09-18",
+      "license": "Apache-2.0",
+      "desc": "Performant financial charts built with HTML5 canvas"
+    },
+    {
+      "full_name": "plotly/plotly.js",
+      "stars": 18338,
+      "forks": 2034,
+      "lang": "JavaScript",
+      "pushed": "2026-09-17",
+      "license": "MIT",
+      "desc": "Open-source JavaScript charting library behind Plotly and Dash"
+    },
+    {
+      "full_name": "mrmrs/colors",
+      "stars": 9415,
+      "forks": 509,
+      "lang": "CSS",
+      "pushed": "2023-07-20",
+      "license": "NOASSERTION",
+      "desc": "Smarter defaults for colors on the web."
+    },
+    {
+      "full_name": "gto76/python-cheatsheet",
+      "stars": 38679,
+      "forks": 6693,
+      "lang": "Python",
+      "pushed": "2026-07-29",
+      "license": null,
+      "desc": "Comprehensive Python Cheatsheet"
+    }
+  ],
+  "searches": [
+    {
+      "q": "financial data api in:name,description,readme stars:>500",
+      "total": 1241,
+      "top": [
+        {
+          "full_name": "sindresorhus/awesome",
+          "stars": 508275,
+          "forks": 36974,
+          "lang": null,
+          "pushed": "2026-09-02",
+          "desc": "😎 Awesome lists about all kinds of interesting topics [NOTE: Pull requests are temporarily"
+        },
+        {
+          "full_name": "public-apis/public-apis",
+          "stars": 481904,
+          "forks": 53217,
+          "lang": "Python",
+          "pushed": "2026-09-20",
+          "desc": "A collective list of free APIs"
+        },
+        {
+          "full_name": "vinta/awesome-python",
+          "stars": 321968,
+          "forks": 28770,
+          "lang": "Python",
+          "pushed": "2026-09-20",
+          "desc": "The definitive list that answers \"I want to do X in Python, which tool should I use?\""
+        },
+        {
+          "full_name": "awesome-selfhosted/awesome-selfhosted",
+          "stars": 320624,
+          "forks": 15052,
+          "lang": null,
+          "pushed": "2026-09-19",
+          "desc": "A list of Free Software network services and web applications which can be hosted on your "
+        },
+        {
+          "full_name": "affaan-m/ECC",
+          "stars": 263801,
+          "forks": 39463,
+          "lang": "JavaScript",
+          "pushed": "2026-09-20",
+          "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, an"
+        }
+      ]
+    },
+    {
+      "q": "stock market real time data stars:>500",
+      "total": 6,
+      "top": [
+        {
+          "full_name": "ZhuLinsen/daily_stock_analysis",
+          "stars": 65382,
+          "forks": 54687,
+          "lang": "Python",
+          "pushed": "2026-09-19",
+          "desc": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。  LLM-powered multi-market stock analysis"
+        },
+        {
+          "full_name": "HiThink-Tech/Financial-API",
+          "stars": 3679,
+          "forks": 323,
+          "lang": "TypeScript",
+          "pushed": "2026-09-15",
+          "desc": "同花顺官方 A股金融数据服务，提供股票实时行情、历史行情、财务报表、指数、板块、涨停等数据，适用于 AI Agent、量化研究和应用开发，支持 API、MCP、CLI 和 Pyth"
+        },
+        {
+          "full_name": "TickDB/tickdb-unified-realtime-marketdata-api",
+          "stars": 803,
+          "forks": 16,
+          "lang": "Python",
+          "pushed": "2026-06-20",
+          "desc": "TickDB: AI-native real time stock API and market data API for US stocks, HK stocks, A-shar"
+        },
+        {
+          "full_name": "victor369basu/Real-time-stock-market-prediction",
+          "stars": 646,
+          "forks": 120,
+          "lang": "JavaScript",
+          "pushed": "2021-02-03",
+          "desc": "In this repository, I have developed the entire server-side principal architecture for rea"
+        },
+        {
+          "full_name": "AllTick-Official/alltick-realtime-forex-crypto-stock-tick-finance-websocket-api",
+          "stars": 617,
+          "forks": 96,
+          "lang": "Java",
+          "pushed": "2026-09-16",
+          "desc": "AllTick real-time financial market data API with REST and WebSocket access to stocks, fore"
+        }
+      ]
+    },
+    {
+      "q": "financial news rss scraper stars:>300",
+      "total": 0,
+      "top": []
+    },
+    {
+      "q": "market data terminal dashboard stars:>300",
+      "total": 1,
+      "top": [
+        {
+          "full_name": "ErTasselli/OpenTerminal",
+          "stars": 1169,
+          "forks": 191,
+          "lang": "TypeScript",
+          "pushed": "2026-09-15",
+          "desc": "A Terminal-style trading dashboard built entirely on free public market data. No API keys,"
+        }
+      ]
+    },
+    {
+      "q": "economic data treasury yields stars:>100",
+      "total": 0,
+      "top": []
+    }
+  ]
+}

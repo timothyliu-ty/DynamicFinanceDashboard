@@ -1,0 +1,272 @@
+[
+  {
+    "q": "topic:market-data",
+    "full_name": "ccxt/ccxt",
+    "stars": 44078,
+    "forks": 8848,
+    "lang": "Python",
+    "pushed": "2026-09-20",
+    "desc": "A unified trading API with more than 100 crypto exchanges and prediction markets in JavaScript / TypeScript / Python / C# / PHP / Go / Java / Rust"
+  },
+  {
+    "q": "topic:market-data",
+    "full_name": "ranaroussi/yfinance",
+    "stars": 25301,
+    "forks": 3422,
+    "lang": "Python",
+    "pushed": "2026-09-17",
+    "desc": "Download market data from Yahoo! Finance's API"
+  },
+  {
+    "q": "topic:market-data",
+    "full_name": "questdb/questdb",
+    "stars": 17332,
+    "forks": 1649,
+    "lang": "Java",
+    "pushed": "2026-09-21",
+    "desc": "QuestDB is a high performance, open-source, time-series database"
+  },
+  {
+    "q": "topic:market-data",
+    "full_name": "simonlin1212/a-stock-data",
+    "stars": 9995,
+    "forks": 1819,
+    "lang": "Python",
+    "pushed": "2026-09-20",
+    "desc": "A股全栈数据工具包：行情K线·研报·信号·资金面·新闻·财务·公告·打板·ETF期权·舆情·宏观利率·指数日历·期货大宗·事件驱动·可转债 | 15层·85端点·34数据源·除iwencai外免Key | A-share data for AI agents: K-lines, reports, signals, fund flow, news, financials, filings, limit-up, ETF options, sentiment, macro/rates, index, futures/commodities, events, convertibles | 15 layers·85 endpoints·34 sources·no key except iwencai"
+  },
+  {
+    "q": "topic:market-data",
+    "full_name": "JerBouma/FinanceToolkit",
+    "stars": 5361,
+    "forks": 622,
+    "lang": "Python",
+    "pushed": "2026-09-10",
+    "desc": "Transparent and Efficient Financial Analysis"
+  },
+  {
+    "q": "topic:market-data",
+    "full_name": "1nchaos/adata",
+    "stars": 5206,
+    "forks": 699,
+    "lang": "Python",
+    "pushed": "2025-12-26",
+    "desc": "免费开源A股量化交易数据库； 专注A股，专注量化，向阳而生； 开放、纯净、持续、为Ai(爱)发电。为个人量化交易而生，保卫3000点，珍惜底部机会......【股票数据，股票行情数据，股票量化数据，股票交易数据，k线行情数据，股票概念数据，股票数据接口，行情数据接口，量化交易数据】【多数据源融合，动态设置代理，保障数据高可用性】"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "wilsonfreitas/awesome-quant",
+    "stars": 29671,
+    "forks": 4017,
+    "lang": "HTML",
+    "pushed": "2026-09-21",
+    "desc": "A curated list of insanely awesome libraries, packages and resources for Quants (Quantitative Finance)"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "ranaroussi/yfinance",
+    "stars": 25301,
+    "forks": 3422,
+    "lang": "Python",
+    "pushed": "2026-09-17",
+    "desc": "Download market data from Yahoo! Finance's API"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "akfamily/akshare",
+    "stars": 22662,
+    "forks": 3515,
+    "lang": "Python",
+    "pushed": "2026-09-20",
+    "desc": "AKShare is an elegant and simple financial data interface library for Python, built for human beings! 开源财经数据接口库"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "simonlin1212/a-stock-data",
+    "stars": 9995,
+    "forks": 1819,
+    "lang": "Python",
+    "pushed": "2026-09-20",
+    "desc": "A股全栈数据工具包：行情K线·研报·信号·资金面·新闻·财务·公告·打板·ETF期权·舆情·宏观利率·指数日历·期货大宗·事件驱动·可转债 | 15层·85端点·34数据源·除iwencai外免Key | A-share data for AI agents: K-lines, reports, signals, fund flow, news, financials, filings, limit-up, ETF options, sentiment, macro/rates, index, futures/commodities, events, convertibles | 15 layers·85 endpoints·34 sources·no key except iwencai"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "JerBouma/FinanceToolkit",
+    "stars": 5361,
+    "forks": 622,
+    "lang": "Python",
+    "pushed": "2026-09-10",
+    "desc": "Transparent and Efficient Financial Analysis"
+  },
+  {
+    "q": "topic:financial-data",
+    "full_name": "RomelTorres/alpha_vantage",
+    "stars": 4923,
+    "forks": 780,
+    "lang": "Python",
+    "pushed": "2026-07-26",
+    "desc": "A python wrapper for Alpha Vantage API for financial data."
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "cyberboysumanjay/Inshorts-News-API",
+    "stars": 286,
+    "forks": 73,
+    "lang": "Python",
+    "pushed": "2023-09-28",
+    "desc": "Unofficial API of Inshorts written in Flask"
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "KVignesh122/AssetNewsSentimentAnalyzer",
+    "stars": 200,
+    "forks": 34,
+    "lang": "Python",
+    "pushed": "2026-07-15",
+    "desc": "A sentiment analyzer package for financial assets and securities utilizing GPT models."
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "DatanewsOrg/google-news-js",
+    "stars": 88,
+    "forks": 12,
+    "lang": "JavaScript",
+    "pushed": "2025-03-15",
+    "desc": "Google News js is an npm package, that provides easy APIs to scrape Google News. Developed by Datanews."
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "Sayad-Uddin-Tahsin/BBC-News-API",
+    "stars": 42,
+    "forks": 5,
+    "lang": "JavaScript",
+    "pushed": "2025-12-13",
+    "desc": "A simple and yet easy-to-use API for BBC News"
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "Shineii86/AniNewsAPI",
+    "stars": 36,
+    "forks": 21,
+    "lang": "JavaScript",
+    "pushed": "2026-08-01",
+    "desc": "Powerful Anime News API - real-time aggregation from 7 sources with smart caching, keyword search, RSS feeds, and full-article extraction."
+  },
+  {
+    "q": "topic:news-api",
+    "full_name": "pranciskus/newsmcp",
+    "stars": 34,
+    "forks": 2,
+    "lang": "TypeScript",
+    "pushed": "2026-03-06",
+    "desc": "MCP server for real-time world news — free, no API key required"
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "RSSNext/Folo",
+    "stars": 38996,
+    "forks": 2126,
+    "lang": "TypeScript",
+    "pushed": "2026-09-20",
+    "desc": "🧡 Folo is the AI RSS Reader"
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "glanceapp/glance",
+    "stars": 37137,
+    "forks": 1466,
+    "lang": "Go",
+    "pushed": "2026-09-05",
+    "desc": "A self-hosted dashboard that puts all your feeds in one place"
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "FreshRSS/FreshRSS",
+    "stars": 16086,
+    "forks": 1281,
+    "lang": "PHP",
+    "pushed": "2026-09-20",
+    "desc": "A free, self-hostable news aggregator…"
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "Ranchero-Software/NetNewsWire",
+    "stars": 10397,
+    "forks": 755,
+    "lang": "Swift",
+    "pushed": "2026-09-20",
+    "desc": "RSS reader for macOS and iOS."
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "yang991178/fluent-reader",
+    "stars": 9672,
+    "forks": 539,
+    "lang": "TypeScript",
+    "pushed": "2026-09-16",
+    "desc": "Modern desktop RSS reader built with Electron, React, and Fluent UI"
+  },
+  {
+    "q": "topic:rss-reader",
+    "full_name": "GetStream/Winds",
+    "stars": 9093,
+    "forks": 625,
+    "lang": "JavaScript",
+    "pushed": "2021-10-11",
+    "desc": "A Beautiful Open Source RSS & Podcast App Powered by Getstream.io"
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "akfamily/akshare",
+    "stars": 22662,
+    "forks": 3515,
+    "lang": "Python",
+    "pushed": "2026-09-20",
+    "desc": "AKShare is an elegant and simple financial data interface library for Python, built for human beings! 开源财经数据接口库"
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "pydata/pandas-datareader",
+    "stars": 3269,
+    "forks": 693,
+    "lang": "Python",
+    "pushed": "2026-07-21",
+    "desc": "Extract data from a wide range of Internet sources into a pandas DataFrame."
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "justinzm/gopup",
+    "stars": 2546,
+    "forks": 379,
+    "lang": "Python",
+    "pushed": "2023-09-15",
+    "desc": "数据接口：百度、谷歌、头条、微博指数,宏观数据，利率数据，货币汇率，千里马、独角兽公司，新闻联播文字稿，影视票房数据，高校名单，疫情数据…"
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "mortada/fredapi",
+    "stars": 1658,
+    "forks": 241,
+    "lang": "Python",
+    "pushed": "2026-01-28",
+    "desc": "Python API for FRED (Federal Reserve Economic Data) and ALFRED (Archival FRED)"
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "turicas/socios-brasil",
+    "stars": 611,
+    "forks": 138,
+    "lang": "Python",
+    "pushed": "2026-08-12",
+    "desc": "Captura os dados de sócios das empresas brasileiras na Receita Federal e exporta para um formato legível por humanos"
+  },
+  {
+    "q": "topic:economic-data",
+    "full_name": "avelkoski/FRB",
+    "stars": 181,
+    "forks": 41,
+    "lang": "Python",
+    "pushed": "2023-07-07",
+    "desc": "Python Client for Interfacing with the Federal Reserve Bank of St. Louis' Economic Data API (FRED®)"
+  }
+]

@@ -196,6 +196,112 @@ tbody td.fd { animation: flash-down 0.75s ease-out; }
 .news-title a.mt-shown { color: #d9a3ff; }
 .xl-budget { color: var(--text-dim); }
 
+/* -------------------------------------------------------------- quant UI */
+.kv-click { cursor: pointer; }
+.kv-click:hover b { color: var(--amber); }
+.regime-on { color: var(--up) !important; font-weight: 700 !important; }
+.regime-off { color: var(--down) !important; font-weight: 700 !important; }
+.regime-neu { color: var(--warn) !important; font-weight: 700 !important; }
+.alert-hot { color: var(--warn) !important; font-weight: 700 !important; }
+
+.qstrip {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 8px;
+  border-bottom: 1px solid var(--line-soft); background: #070b10;
+}
+.qcard {
+  background: #0b1118; border: 1px solid var(--line); padding: 4px 8px;
+  min-width: 132px; flex: 1 1 132px;
+}
+.qcard .qlbl { color: var(--text-dim); font-size: 9.5px; letter-spacing: 0.6px; }
+.qcard .qval { color: var(--text-hi); font-size: 13px; font-weight: 700; margin-top: 1px; }
+.qcard .qsub { color: var(--text-dim); font-size: 9.5px; margin-top: 1px; }
+
+.sig-pill {
+  display: inline-block; font-size: 9px; padding: 0 4px;
+  border: 1px solid var(--line); color: var(--text-dim); letter-spacing: 0.4px;
+}
+.sig-pill.pos { color: var(--up); border-color: #16543a; background: #06150e; }
+.sig-pill.neg { color: var(--down); border-color: #5c1d24; background: #170609; }
+.sig-pill.warn { color: var(--warn); border-color: #4a3c10; background: #171204; }
+
+.spark { display: inline-block; vertical-align: middle; }
+.svg-wrap { padding: 6px 8px; background: #060a0f; border-bottom: 1px solid var(--line-soft); }
+.svg-legend {
+  display: flex; gap: 14px; flex-wrap: wrap; font-size: 10px;
+  color: var(--text-dim); margin-top: 4px;
+}
+.svg-legend span i {
+  display: inline-block; width: 10px; height: 2px; vertical-align: middle; margin-right: 4px;
+}
+
+.regime-bar-row {
+  display: grid; grid-template-columns: 120px 1fr 70px 115px;
+  align-items: center; gap: 8px; padding: 3px 8px;
+  border-bottom: 1px solid var(--line-soft); font-size: 11px;
+}
+.rbar-track {
+  position: relative; height: 8px; background: #0f1721; border: 1px solid var(--line);
+}
+.rbar-mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #2c3e52; }
+.rbar-fill { position: absolute; top: 0; bottom: 0; }
+
+.corr-wrap { overflow-x: auto; padding: 4px 6px; }
+.corr-tbl th, .corr-tbl td { text-align: center; padding: 2px 5px; font-size: 10.5px; }
+.corr-tbl td.c-self { color: var(--text-dim); background: #0b1118; }
+
+.news-bar {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  padding: 5px 8px; background: #0a1017; border-bottom: 1px solid var(--line);
+}
+.news-bar input, .qform input, .qform select {
+  background: #05080c; color: var(--text-hi); border: 1px solid var(--line);
+  font-family: var(--mono); font-size: 11px; padding: 3px 6px;
+}
+.news-bar input:focus, .qform input:focus, .qform select:focus {
+  outline: none; border-color: var(--amber);
+}
+.chip {
+  font-size: 9.5px; padding: 1px 5px; border: 1px solid var(--line);
+  background: #0c131c; color: var(--text); cursor: pointer;
+}
+.chip:hover, .chip.active { border-color: var(--amber); color: var(--amber); }
+.tk-tag {
+  font-size: 9px; padding: 0 4px; margin-left: 4px;
+  border: 1px solid #2b3f54; color: #7fd3ff; cursor: pointer;
+}
+.ev-tag {
+  font-size: 9px; padding: 0 4px; margin-left: 4px;
+  border: 1px solid #4a3c10; color: var(--warn); cursor: pointer;
+}
+.sent-tag { font-size: 9px; padding: 0 4px; margin-left: 4px; border: 1px solid var(--line); }
+.sent-tag.BULL { color: var(--up); border-color: #16543a; }
+.sent-tag.BEAR { color: var(--down); border-color: #5c1d24; }
+
+.qform {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  padding: 6px 8px; background: #090e14; border-bottom: 1px solid var(--line);
+}
+.qbtn {
+  background: #131e2b; color: var(--amber); border: 1px solid var(--amber-dim);
+  font-family: var(--mono); font-size: 10.5px; padding: 3px 9px; cursor: pointer;
+}
+.qbtn:hover { background: var(--amber); color: #1a1004; font-weight: 700; }
+.qbtn-del {
+  background: transparent; color: var(--down); border: 1px solid #4a1a20;
+  font-family: var(--mono); font-size: 10px; padding: 0 5px; cursor: pointer;
+}
+.qbtn-del:hover { background: #2a0d12; }
+.qmsg { font-size: 10.5px; color: var(--warn); padding: 0 6px; }
+.export-row {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  padding: 6px 8px; font-size: 10.5px; color: var(--text-dim);
+}
+.export-row a {
+  color: var(--amber); text-decoration: none; border: 1px solid var(--line);
+  padding: 2px 7px; font-size: 10px;
+}
+.export-row a:hover { border-color: var(--amber); background: #141c26; }
+
 /* -------------------------------------------------------------- statusbar */
 #statusbar {
   flex: 0 0 auto; display: flex; gap: 18px; align-items: center;
@@ -209,4 +315,5 @@ tbody td.fd { animation: flash-down 0.75s ease-out; }
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
   .bsub { display: none; }
+  .regime-bar-row { grid-template-columns: 95px 1fr 55px; }
 }

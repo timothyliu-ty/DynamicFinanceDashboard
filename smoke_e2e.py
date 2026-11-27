@@ -176,9 +176,16 @@ def main():
                     kinds.add(json.loads(e[6:]).get("type"))
                 except Exception:
                     pass
-        check("SSE event types valid", kinds <= {"snapshot", "heartbeat"} and kinds,
+        check("SSE event types valid", kinds <= {"snapshot", "delta", "heartbeat"} and kinds,
               str(sorted(kinds)))
         conn.close()
+
+        print("\n== 量化分析接口 ==")
+        code, raw = http_get("/api/quant")
+        check("GET /api/quant -> 200", code == 200, "status=%s" % code)
+        qd = json.loads(raw) if code == 200 else {}
+        check("quant payload has regime & spreads",
+              "regime" in qd and "spreads" in qd and "yield_curve" in qd)
 
         print("\n== 国际化 / 翻译 (AC-D8) ==")
         code, raw = http_get("/api/i18n")

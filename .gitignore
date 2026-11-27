@@ -3,4 +3,9 @@ __pycache__/
 .pytest_cache/
 data/*.log
 data/translation_cache.json
+data/*.sqlite3
+data/*.sqlite3-*
+data/portfolio.json
+data/alerts.json
+data/watchlist.json
 reports/*.png

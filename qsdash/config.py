@@ -15,11 +15,16 @@
 
 from __future__ import annotations
 
+import json
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "data")
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+DB_PATH = os.path.join(DATA_DIR, "qsdash_history.sqlite3")
+WATCHLIST_PATH = os.path.join(DATA_DIR, "watchlist.json")
+PORTFOLIO_PATH = os.path.join(DATA_DIR, "portfolio.json")
+ALERTS_PATH = os.path.join(DATA_DIR, "alerts.json")
 
 # ----------------------------------------------------------------------------
 # HTTP
@@ -39,6 +44,11 @@ TREASURY_NOMINAL = ("https://home.treasury.gov/resource-center/data-chart-center
 TREASURY_REAL = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
                  "pages/xml?data=daily_treasury_real_yield_curve&field_tdr_date_value={year}")
 BINANCE_24HR = "https://api.binance.com/api/v3/ticker/24hr?symbols={symbols}"
+BINANCE_FAPI_PREMIUM = "https://fapi.binance.com/fapi/v1/premiumIndex"
+BINANCE_FAPI_OI = "https://fapi.binance.com/fapi/v1/openInterest?symbol={symbol}"
+BINANCE_KLINES = "https://api.binance.com/api/v3/klines?symbol={symbol}&interval={interval}&limit={limit}"
+OKX_SPOT_TICKERS = "https://www.okx.com/api/v5/market/tickers?instType=SPOT"
+BYBIT_SPOT_TICKERS = "https://api.bybit.com/v5/market/tickers?category=spot"
 FRANKFURTER = "https://api.frankfurter.app/latest?from=USD"
 ECB_DAILY = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
 
@@ -107,6 +117,7 @@ REFRESH = {
     "CRYPTO": 5,
     "NEWS": 90,
 }
+CRYPTO_DERIV_REFRESH = 15  # 永续资金费率 / 持仓量 / 跨所价差刷新周期（秒）
 
 ASSET_CLASSES = ["EQUITY", "FX", "COMMODITIES", "BONDS", "CRYPTO"]
 
@@ -129,5 +140,73 @@ CRYPTO_NAMES = {
 }
 CURRENCY_BY_CLASS = {"EQUITY": "USD", "FX": "", "COMMODITIES": "USD",
                      "BONDS": "%", "CRYPTO": "USD"}
+
+
+def _dedupe_list(seq):
+    out, seen = [], set()
+    for x in seq:
+        if x not in seen:
+            seen.add(x)
+            out.append(x)
+    return out
+
+
+def load_watchlist(path=None):
+    """读取用户自定义自选扩展（watchlist.json）。不存在或损坏时返回空覆盖。"""
+    p = path or WATCHLIST_PATH
+    try:
+        with open(p, "r", encoding="utf-8") as f:
+            d = json.load(f)
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def save_watchlist(overrides, path=None):
+    """原子持久化自定义自选覆盖。"""
+    p = path or WATCHLIST_PATH
+    d = os.path.dirname(p)
+    if d and not os.path.isdir(d):
+        os.makedirs(d, exist_ok=True)
+    tmp = p + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(overrides, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, p)
+
+
+def get_universe(path=None):
+    """合并默认 UNIVERSE 与用户自定义自选（支持追加 us/cn_idx/CRYPTO 等标的）。"""
+    ov = load_watchlist(path)
+    eq = {
+        "us": _dedupe_list(
+            list(UNIVERSE["EQUITY"]["us"])
+            + [str(s).strip().lower() for s in (ov.get("us_equity") or []) if str(s).strip()]
+        ),
+        "int_idx": list(UNIVERSE["EQUITY"]["int_idx"]),
+        "cn_idx": _dedupe_list(
+            list(UNIVERSE["EQUITY"]["cn_idx"])
+            + [str(s).strip().lower() for s in (ov.get("cn_equity") or []) if str(s).strip()]
+        ),
+    }
+    crypto_list = _dedupe_list(
+        list(UNIVERSE["CRYPTO"])
+        + [str(s).strip().upper() for s in (ov.get("crypto") or []) if str(s).strip()]
+    )
+    fx_list = _dedupe_list(
+        list(UNIVERSE["FX"])
+        + [str(s).strip().lower() for s in (ov.get("fx") or []) if str(s).strip()]
+    )
+    comm_list = _dedupe_list(
+        list(UNIVERSE["COMMODITIES"])
+        + [str(s).strip() for s in (ov.get("commodities") or []) if str(s).strip()]
+    )
+    return {
+        "EQUITY": eq,
+        "FX": fx_list,
+        "COMMODITIES": comm_list,
+        "BONDS": list(UNIVERSE["BONDS"]),
+        "CRYPTO": crypto_list,
+    }
+
 
 os.makedirs(DATA_DIR, exist_ok=True)

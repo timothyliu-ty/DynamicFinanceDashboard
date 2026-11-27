@@ -2,15 +2,17 @@
 
 **English** · **[简体中文](README.zh-CN.md)**
 
-A single-process, zero-dependency market terminal that runs in your browser: live prices for
-**equities, FX, commodities, bonds and crypto**, plus **15 concurrent news feeds**, rendered in a
-Bloomberg-terminal idiom — dark, amber, monospace, dense.
+A single-process market & quantitative trading terminal that runs in your browser: live prices for
+**equities, FX, commodities, bonds and crypto**, **15 ticker-tagged news feeds**, plus **SQLite
+time-series persistence, yield curve & PCA analytics, cross-asset stat-arb spreads, crypto perpetual
+funding/basis & cross-venue dispersion, a rule-based alert engine, and a local MTM portfolio book** —
+rendered in a Bloomberg-terminal idiom (dark, amber, monospace, dense, zero external CDNs).
 
-No `pip install`. No `npm install`. No API keys. Python 3 standard library and vanilla browser
-APIs only.
+Install the scientific Python math stack (`numpy`, `pandas`, `scipy`) via `requirements.txt`; no
+`npm install` and no API keys required.
 
 ```bash
-cd Dashboard
+pip install -r requirements.txt
 python3 -m qsdash serve          # -> http://127.0.0.1:8848
 ```
 
@@ -20,21 +22,33 @@ python3 -m qsdash serve          # -> http://127.0.0.1:8848
 
 | Key | Page | Key | Page |
 |---|---|---|---|
-| `F1` | OVERVIEW (all five classes + news) | `F5` | BONDS |
-| `F2` | EQUITIES | `F6` | CRYPTO |
-| `F3` | FX | `F7` | NEWS |
-| `F4` | COMMODITIES | `Esc` | back to OVERVIEW |
+| `F1` | OVERVIEW (quant pulse + all five classes + news) | `F6` | CRYPTO (spot + perp funding/basis/dispersion) |
+| `F2` | EQUITIES (52w range, drawdown, P/E, sparklines) | `F7` | NEWS (ticker/event tags, filter bar, MT) |
+| `F3` | FX (rolling z-score, CNH–CNY basis) | `F8` | QUANT (regime, spreads, curve SVG & PCA, corr) |
+| `F4` | COMMODITIES (bid-ask bps, intraday range) | `F9` | BOOK/ALERTS (MTM PnL, alert rules, watchlist) |
+| `F5` | BONDS (SVG curve, breakevens, 2s5s10s, YTD Z) | `Esc` | back to OVERVIEW |
 
-Deep links work: `http://127.0.0.1:8848/#CRYPTO`, and with a language prefix `#zh/CRYPTO`.
-The page updates itself over Server-Sent Events — no manual refresh, no polling in the browser.
+Deep links work: `http://127.0.0.1:8848/#QUANT`, and with a language prefix `#zh/QUANT`.
+The page updates itself over **Delta Server-Sent Events** — only changed asset classes are pushed.
 
-### Three commands
+### CLI commands
 
 ```bash
-python3 -m qsdash serve              # the terminal
-python3 -m qsdash check              # one-shot health check of all six feeds (exit 1 on failure)
-python3 -m qsdash snapshot --json    # dump one full snapshot
+python3 -m qsdash serve                      # run the terminal + SQLite recorder + quant engine
+python3 -m qsdash quant [--json]             # one-shot quant report (spreads, curve PCA, funding, regime)
+python3 -m qsdash export --symbol BTC --out btc.csv  # export recorded SQLite history to CSV
+python3 -m qsdash check                      # one-shot health check of all six feeds (exit 1 on failure)
+python3 -m qsdash snapshot --json            # dump one full snapshot
 ```
+
+### Programmatic Quant APIs
+
+- `GET /api/quant` — macro regime, cross-asset spreads, yield curve + SVD PCA, crypto funding/basis/dispersion, rolling z-scores & correlation matrix
+- `GET /api/history?symbol=BTC&limit=300` (also `?type=curve` and `?type=funding&symbol=BTC`)
+- `GET /api/export.csv?symbol=BTC&limit=5000` — RFC 4180 CSV export for Python/Excel research
+- `GET|POST|DELETE /api/alerts` — quant rule engine (`price_above/below`, `pct_move_abs`, `spread_above/below`, `zscore_abs`, `funding_ann_abs`, `dispersion_bps`, `news_keyword`)
+- `GET|POST|DELETE /api/portfolio` — local paper book MTM PnL, exposure by class, and HHI concentration
+- `GET|POST /api/watchlist` — extend default symbol universes without editing code
 
 ---
 

@@ -89,6 +89,65 @@ def cmd_snapshot(args):
     return 0
 
 
+def cmd_quant(args):
+    hub = Hub()
+    hub.refresh_all(include_deriv=True)
+    q = hub.quant_snapshot()
+    if args.json:
+        print(json.dumps(q, ensure_ascii=False, indent=2, default=str))
+        return 0
+    reg = q.get("regime") or {}
+    print("qsdash quant report  regime=%s (score=%s, factors=%s)" % (
+        reg.get("label"), reg.get("score"), reg.get("n_factors")))
+    print("=" * 78)
+    print("\n== CROSS-ASSET SPREADS & RATIOS ==")
+    for s in (q.get("spreads") or []):
+        sec = ("  (%s %s)" % (s["secondary"], s["secondary_unit"])) if s.get("secondary") is not None else ""
+        print("  %-12s %-26s %10s %-6s %-14s%s" % (
+            s["id"], s["name"][:26], s["value"], s.get("unit") or "", s.get("signal") or "", sec))
+    yc = q.get("yield_curve") or {}
+    if yc.get("ok"):
+        print("\n== YIELD CURVE & BREAKEVENS (as_of=%s, n=%d days) ==" % (
+            yc.get("as_of"), yc.get("n_days") or 0))
+        for m in (yc.get("metrics") or []):
+            print("  %-10s %-16s last=%-7s 1d=%-7s 1m=%-7s z(YTD)=%-6s pct=%s" % (
+                m["symbol"], m["label"][:16], _fmt(m["last"], 7, 3),
+                _fmt(m["chg_1d_bps"], 6, 1) + "bp" if m["chg_1d_bps"] is not None else "—",
+                _fmt(m["chg_1m_bps"], 6, 1) + "bp" if m["chg_1m_bps"] is not None else "—",
+                _fmt(m["zscore_ytd"], 6, 2),
+                ("%.0f%%" % m["pct_rank_ytd"]) if m["pct_rank_ytd"] is not None else "—"))
+        if yc.get("pca"):
+            ve = yc["pca"]["variance_explained_pct"]
+            print("  PCA (n=%d): Level=%.1f%%  Slope=%.1f%%  Curvature=%.1f%%" % (
+                yc["pca"]["n_obs"], ve["level_pc1"] or 0, ve["slope_pc2"] or 0, ve["curvature_pc3"] or 0))
+    cd = q.get("crypto_deriv") or {}
+    if cd.get("ok"):
+        print("\n== CRYPTO PERP FUNDING, BASIS & CROSS-VENUE DISPERSION ==")
+        for r in (cd.get("rows") or []):
+            print("  %-6s mark=%-11s fund(ann)=%-8s basis=%-7s disp(OKX)=%-7s OI=$%s" % (
+                r["symbol"], _fmt(r["mark_price"], 10, 3),
+                ("%+.1f%%" % r["funding_ann_pct"]) if r["funding_ann_pct"] is not None else "—",
+                ("%+.1fbp" % r["basis_bps"]) if r["basis_bps"] is not None else "—",
+                ("%+.1fbp" % r["dispersion_bps"]) if r["dispersion_bps"] is not None else "—",
+                ("%.1fM" % (r["oi_usd"] / 1e6)) if r["oi_usd"] is not None else "—"))
+    hub.store.close()
+    return 0
+
+
+def cmd_export(args):
+    from .storage import TimeSeriesStore
+    st = TimeSeriesStore()
+    data = st.export_csv(symbol=args.symbol, asset_class=args.asset_class, limit=args.limit)
+    st.close()
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(data)
+        print("exported -> %s (%d bytes)" % (args.out, len(data)))
+    else:
+        sys.stdout.write(data)
+    return 0
+
+
 def cmd_serve(args):
     from .server import make_server
     hub = Hub()
@@ -106,8 +165,8 @@ def cmd_serve(args):
         return 2
 
     if not args.no_prime:
-        print("priming all sources ...")
-        hub.refresh_all()
+        print("priming all sources + crypto derivatives ...")
+        hub.refresh_all(include_deriv=True)
         snap = hub.snapshot()
         print("primed: %d/%d classes ok %s" % (
             snap["summary"]["classes_ok"], snap["summary"]["classes_total"],
@@ -117,7 +176,8 @@ def cmd_serve(args):
     print("qsdash terminal -> http://127.0.0.1:%d   (或 http://localhost:%d)"
           % (args.port, args.port))
     print("listening on %s   (--host 0.0.0.0 可对外，无鉴权)" % args.host)
-    print("refreshing: " + ", ".join("%s=%ds" % (k, v) for k, v in config.REFRESH.items()))
+    print("refreshing: " + ", ".join("%s=%ds" % (k, v) for k, v in config.REFRESH.items())
+          + ", DERIV=%ds" % config.CRYPTO_DERIV_REFRESH)
     print("Ctrl-C to stop")
     try:
         httpd.serve_forever()
@@ -130,7 +190,7 @@ def cmd_serve(args):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(prog="qsdash", description="全球多资产实时终端")
+    p = argparse.ArgumentParser(prog="qsdash", description="全球多资产量化实时终端")
     sub = p.add_subparsers(dest="cmd")
 
     s = sub.add_parser("serve", help="启动终端")
@@ -145,6 +205,17 @@ def main(argv=None):
     k = sub.add_parser("snapshot", help="打印一次快照")
     k.add_argument("--json", action="store_true")
     k.set_defaults(func=cmd_snapshot)
+
+    q = sub.add_parser("quant", help="打印量化分析报告（利差/盈亏平衡通胀/永续费率/宏观状态）")
+    q.add_argument("--json", action="store_true")
+    q.set_defaults(func=cmd_quant)
+
+    ex = sub.add_parser("export", help="从 SQLite 导出历史行情 CSV")
+    ex.add_argument("--symbol", default=None, help="标的代码（如 BTC / AAPL / 10Y）")
+    ex.add_argument("--asset-class", default=None, help="资产类别（EQUITY/FX/COMMODITIES/BONDS/CRYPTO）")
+    ex.add_argument("--limit", type=int, default=5000)
+    ex.add_argument("--out", default=None, help="输出文件路径（缺省输出到 stdout）")
+    ex.set_defaults(func=cmd_export)
 
     args = p.parse_args(argv)
     if not getattr(args, "func", None):

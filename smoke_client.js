@@ -127,7 +127,7 @@ const exhaustedTranslate = (body) => ({
 
   console.log('\n== 启动与英文默认界面 (AC-D8.2) ==');
   check('page booted without JS errors', a.errors.length === 0, a.errors.join(' | '));
-  check('function bar rendered 7 pages', await until(() => fnBar(win).length === 7),
+  check('function bar rendered 9 pages', await until(() => fnBar(win).length === 9),
         'n=' + fnBar(win).length);
   check('F1 label is OVERVIEW in en', fnBar(win)[0].textContent.indexOf('OVERVIEW') >= 0,
         fnBar(win)[0].textContent);
@@ -137,7 +137,7 @@ const exhaustedTranslate = (body) => ({
   check('clock label is CLOCK in en', win.document.getElementById('l-clock').textContent === 'CLOCK',
         win.document.getElementById('l-clock').textContent);
   check('grid rendered EQUITIES panel',
-        win.document.getElementById('grid').textContent.indexOf('EQUITIES') >= 0);
+        await until(() => win.document.getElementById('grid').textContent.indexOf('EQUITIES') >= 0));
   check('news rows rendered', anchors(win).length > 0, 'n=' + anchors(win).length);
   check('no translation requested while in en', a.stats.calls === 0, 'calls=' + a.stats.calls);
   check('titles show the source language in en', anchors(win)[0].textContent.length > 0,
@@ -197,13 +197,21 @@ const exhaustedTranslate = (body) => ({
   await sleep(250);
   check('F7 news page renders the feed-status panel',
         win.document.getElementById('grid').textContent.indexOf('\u6570\u636e\u6e90\u72b6\u6001') >= 0);
+  fnBar(win)[7].click();
+  await sleep(200);
+  check('F8 QUANT page renders quant analytics panels',
+        win.document.getElementById('grid').textContent.indexOf('CSV') >= 0);
+  fnBar(win)[8].click();
+  await sleep(200);
+  check('F9 BOOK page renders portfolio & alerts forms',
+        !!win.document.getElementById('form-pos') && !!win.document.getElementById('form-alert'));
   check('no JS errors after all interactions', a.errors.length === 0, a.errors.join(' | '));
 
   // ------------------------------------------------------------ 场景二
   console.log('\n=== 场景二：翻译额度用尽 ===');
   const b = bootDom(exhaustedTranslate);
   const w2 = b.win;
-  await until(() => fnBar(w2).length === 7);
+  await until(() => fnBar(w2).length === 9);
   zhButton(w2).click();
   await sleep(250);
   await until(() => b.stats.calls > 0);
